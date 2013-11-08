@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+</head>
+<link rel="stylesheet" href="nestedsortable.css">
+
+
+<body>
+
+<section id="demo">
+	<ol class="sortable">
+		<li id="list_1"><div><span class="disclose"><span></span></span>Item 1</div>
+			<ol>
+				<li id="list_2"><div><span class="disclose"><span></span></span>Sub Item 1.1</div>
+					<ol>
+						<li id="list_3"><div><span class="disclose"><span></span></span>Sub Item 1.2</div>
+					</ol>
+			</ol>
+		<li id="list_4"><div><span class="disclose"><span></span></span>Item 2</div>
+		<li id="list_5"><div><span class="disclose"><span></span></span>Item 3</div>
+			<ol>
+				<li id="list_6" class="mjs-nestedSortable-no-nesting"><div><span class="disclose"><span></span></span>Sub Item 3.1 (no nesting)</div>
+				<li id="list_7"><div><span class="disclose"><span></span></span>Sub Item 3.2</div>
+					<ol>
+						<li id="list_8"><div><span class="disclose"><span></span></span>Sub Item 3.2.1</div>
+					</ol>
+			</ol>
+		<li id="list_9"><div><span class="disclose"><span></span></span>Item 4</div>
+		<li id="list_10"><div><span class="disclose"><span></span></span>Item 5</div>
+	</ol>
+
+</section> 
+<!-- END #demo -->
+
+
+
+
+	<script src="http://code.jquery.com/jquery-2.1.0-beta1.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript"></script>
+
+	<script src="jquery.nestedSortable.js"></script>
+
+
+	<script>
+
+			(function(){
+			if (!/*@cc_on!@*/0) return;
+			var e = ("abbr article aside audio canvas command datalist details figure figcaption footer "+
+				"header hgroup mark meter nav output progress section summary time video").split(' '),
+			i=e.length;
+			while (i--) {
+			document.createElement(e[i])
+			}
+		})(document.documentElement,'className');
+
+
+	$(document).ready(function(){
+
+		//code
+
+	});
+
+</script>
+
+
+</body>
+</html>

@@ -86,6 +86,7 @@
       })
       $item.addClass("dragged")
       $("body").addClass("dragging")
+
     },
     // Called when the mouse button is beeing released
     onDrop: function ($item, container, _super, event) {
@@ -263,7 +264,6 @@
       y = e.pageY,
       box = this.sameResultBox,
       t = this.options.tolerance
-
       if(!box || box.top - t > y || box.bottom + t < y || box.left - t > x || box.right + t < x)
         if(!this.searchValidTarget())
           this.placeholder.detach()

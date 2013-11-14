@@ -10,116 +10,71 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
 <script src="////netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/application.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="css/jquery-sortable.css"> -->
-<style>
-	ol{min-height: 20px;}
-	.ui-state-hover{
-		border:1px dotted black;
-	}
-	.ui-state-default{
-		border:2px dotted lightgreen;
-	}
-	.plugin-container{
-		border: 7px solid #292929;
-		outline: 7px solid #e3e3e3;
-		margin: auto;
-		width: 445px;
-		height: 250px;
-		-webkit-box-shadow: 10px 10px 126px 0px rgba(0,0,0,0.75);
-		-moz-box-shadow: 10px 10px 126px 0px rgba(0,0,0,0.75);
-		box-shadow: 10px 10px 126px 0px rgba(0,0,0,0.75);
-
-	}
-	.asset{}
-	.asset-container{
-		width: 200px;
-		height: 100%;
-		overflow: scroll;
-		border: 1px solid black;
-	}
-	.asset-list{}
-
-
-
-	.organization{}
-	.organization-container{
-		width: 200px;
-		height: 100%;
-		overflow: scroll;
-				border: 1px solid black;
-
-	}
-	.organization-list{}
-
-
-
-
-
-
-	#feedback { font-size: 1.4em; }
-	.selectable .ui-selecting { background: #FECA40; }
-	.selectable .ui-selected { background: #F39814; color: white; }
-	.selectable {  }
-	.selectable li {  }
-	.active{border: 1px dashed red}
-.appear{
-	display: none;
-}
-
-</style>
-
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="default.css">
 </head>
 <body>
 
 
-	<div class="container plugin-container">
-
-		<div class="asset-container pull-left">
-			<div class="row">
-				<div class="col-md-12 asset-list">
-					<ol id="assets" class="default vertical ">
-						<li class="asset">Video 1</li>
-						<li class="asset">Video 3</li>
-						<li class="asset">Video 2</li>
-						<li class="asset">Video 4</li>
-						<li class="asset">Video 5</li>
-						<li class="asset">Video 6</li>
-						<li class="asset">Video 7</li>
-						<li class="asset">Video 8</li>
-						<li class="asset">Video 9</li>
-						<li class="asset">Video 10</li>
-					</ol>
+	<p></p>
+	<div class="container">
+		<div class="col-md-6"></div>
+		<div class="col-md-6">
+			<div class="asset-orgainizer">
+				<div class="asset-container">
+					<div class="toolbar">
+						<input type="checkbox">
+						<input type="text">
+					</div>
+					<div class="asset-list">
+						<ol id="assets">
+							<li class="asset">Video 1</li>
+							<li class="asset">Video 2</li>
+							<li class="asset">Video 3</li>
+							<li class="asset">Video 4</li>
+							<li class="asset">Video 5</li>
+							<li class="asset">Video 6</li>
+							<li class="asset">Video 7</li>
+							<li class="asset">Video 8</li>
+							<li class="asset">Video 9</li>
+							<li class="asset">Video 10</li>
+							<li class="asset">Video 11</li>
+							<li class="asset">Video 12</li>
+							<li class="asset">Video 13</li>
+							<li class="asset">Video 14</li>
+							<li class="asset">Video 15</li>
+							<li class="asset">Video 16</li>
+							<li class="asset">Video 17</li>
+							<li class="asset">Video 18</li>
+							<li class="asset">Video 19</li>
+							<li class="asset">Video 20</li>
+						</ol>
+					</div>
 				</div>
-			</div>
-		</div>
+				<div class="organization-container">
+					<div class="toolbar">
+						<span><i class="fa fa-plus"></i></span>
+						<span><i class="fa fa-minus"></i></span>
+						<span><i class="fa fa-arrows-v"></i></span>
+					</div>
 
-
-		<div class="organization-container pull-right">
-			<div class="row">
-				<div class="col-md-12 organization-list" >
-					<ol id="organization"  class="default vertical selectable">
-						<li class="collection">Collection - Math Department
-							<ol>
-								<li class="playlist">Playlist - Math Department 1 <ol></ol></li>
-								<li class="playlist">Playlist - Math Department 2 <ol></ol></li>
-							</ol>
-						</li>
-						<li class="collection">
-							Collection - Health Department
-							<ol>
-								<li class="playlist">Playlist - Health Department 1
-									<ol></ol>
-								</li>
-								<li class="playlist">Playlist - Health Department 2
-									<ol></ol></li>
+					<div class="organization-list" >
+						<ol id="organization"  class="">
+							<li class="collection">Collection - Math Department
+								<ol>
+									<li class="playlist">Playlist - Math Department 1 <ol></ol></li>
+									<li class="playlist">Playlist - Math Department 2 <ol></ol></li>
 								</ol>
 							</li>
-							<li class="collection">
-								Collection - Science Department
+							<li class="collection">Collection - Health Department
+								<ol>
+									<li class="playlist">Playlist - Health Department 1<ol></ol></li>
+									<li class="playlist">Playlist - Health Department 2<ol></ol></li>
+								</ol>
+							</li>
+							<li class="collection">Collection - Science Department
 								<ol>
 									<li class="playlist">Playlist - Science Department 1<ol></ol></li>
 									<li class="playlist">Playlist - Science Department 2<ol></ol></li>
@@ -130,11 +85,11 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<script src="js/jquery-sortable.js"></script>
 
-		<script src="js/jquery-sortable.js"></script>
-
-		<script type="text/javascript"></script>
+	<script type="text/javascript"></script>
 
 
 
@@ -146,56 +101,55 @@
 	<script type="text/javascript">
 	// Assets List
 	var oldContainer
-	$("#assets")
-
-	.selectable()
-	.sortable({
-		group: 'nested',
+	$("#assets").sortable({
+		group: 'asset-orgainizer',
 		drop: false,
 
 		onDragStart: function (item, container, _super) {
-        // Duplicate items of the no drop area
-        if (!container.options.drop)
-        	item.clone().insertAfter(item)
-        _super(item)
-    },
+		// Duplicate items of the no drop area
+		if (!container.options.drop){
+
+			item.clone().insertAfter(item)
+		}
+		_super(item)
+	},
 
 
-    afterMove: function (placeholder, container) {
-    	if (oldContainer != container) {
-    		if (oldContainer)
-    			oldContainer.el.removeClass("active")
-    		container.el.addClass("active")
-    		oldContainer = container
-    	}
-    },
-    onDrop: function (item, container, _super) {
-    	container.el.removeClass("active")
-    	_super(item)
-    	console.log(item);
+	afterMove: function (placeholder, container) {
+		if (oldContainer != container) {
+			if (oldContainer)
+				oldContainer.el.removeClass("active")
+			container.el.addClass("active")
+			oldContainer = container
+		}
+	},
+	onDrop: function (item, container, _super) {
+		container.el.removeClass("active")
+		_super(item)
+		console.log(item, container, _super);
 
-    	switch (item.context.className) {
-    		case "collection":
-    		console.log('collection')
-            //
-            break;
-            case "playlist":
-            console.log('playlist')
-            break;
-            case "asset":
-            console.log('asset')
-            break;
-        }
-    }
+		switch (item.context.className) {
+			case "collection":
+			console.log('collection')
+			//
+			break;
+			case "playlist":
+			console.log('playlist')
+			break;
+			case "asset":
+			console.log('asset')
+			break;
+		}
+	}
 })
-
-
-
 
 // CPA list
 $("#organization").sortable({
-	group: 'nested'
+	group: 'asset-orgainizer'
 })
+
+
+
 
 </script>
 </body>

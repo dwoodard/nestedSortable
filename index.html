@@ -20,8 +20,8 @@
 
 	<p></p>
 	<div class="container">
-		<div class="col-md-6"></div>
-		<div class="col-md-6">
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
 			<div class="asset-orgainizer">
 				<div class="asset-container">
 					<div class="toolbar">
@@ -55,7 +55,7 @@
 				</div>
 				<div class="organization-container">
 					<div class="toolbar">
-						<span><i class="fa fa-plus"></i></span>
+						<span><i class="fa fa-plus collection-name"></i></span>
 						<span><i class="fa fa-minus"></i></span>
 						<span><i class="fa fa-arrows-v"></i></span>
 					</div>
@@ -89,7 +89,18 @@
 
 	<script src="js/jquery-sortable.js"></script>
 
-	<script type="text/javascript"></script>
+
+
+
+	<script type="text/javascript">
+
+$('.collection-name').click(function(){
+    $('.collection').parent().prepend($(
+    	'<li class="collection"><input class="input" type="text" placeholder="Collection Name" /><ol></ol></li>'));
+
+});
+
+	</script>
 
 
 
@@ -99,12 +110,15 @@
 
 
 	<script type="text/javascript">
+
+
+
+
 	// Assets List
 	var oldContainer
 	$("#assets").sortable({
 		group: 'asset-orgainizer',
 		drop: false,
-
 		onDragStart: function (item, container, _super) {
 		// Duplicate items of the no drop area
 		if (!container.options.drop){
@@ -112,41 +126,62 @@
 			item.clone().insertAfter(item)
 		}
 		_super(item)
-	},
+		},
+		afterMove: function (placeholder, container) {
+			if (oldContainer != container) {
+				if (oldContainer)
+					oldContainer.el.removeClass("active")
+				container.el.addClass("active")
+				oldContainer = container
+			}
+		},
+		cancel: function (item, container, _super, event) {
+			var isGoodToDrop = true;
+
+			droppedItem = /collection|playlist|asset/i.exec(item[0].className)[0]; 
+			droppedContainer = event.toElement.className;
+			if (droppedContainer == 'active' || droppedContainer == 'placeholder') {
+				droppedContainer = /collection|playlist|asset/i.exec(event.toElement.parentNode.className)[0]; 
+			};
+			
+			console.log(droppedItem,droppedContainer);
+
+			if (droppedItem == "playlist" && droppedContainer == "playlist") {
+				return false;
+			};
+
+			if (droppedItem == "collection" && droppedContainer == "playlist") {
+				return false;
+			};
+
+			if (droppedItem == "playlist" && droppedContainer == "organization-list") {
+				return false;
+			};
+
+			
 
 
-	afterMove: function (placeholder, container) {
-		if (oldContainer != container) {
-			if (oldContainer)
-				oldContainer.el.removeClass("active")
-			container.el.addClass("active")
-			oldContainer = container
+
+			
+			return isGoodToDrop;
+			
+		},
+		onDrop: function (item, container, _super) {
+			// console.log(item, container, _super);
+			container.el.removeClass("active")
+			_super(item)
+
+			
 		}
-	},
-	onDrop: function (item, container, _super) {
-		container.el.removeClass("active")
-		_super(item)
-		console.log(item, container, _super);
-
-		switch (item.context.className) {
-			case "collection":
-			console.log('collection')
-			//
-			break;
-			case "playlist":
-			console.log('playlist')
-			break;
-			case "asset":
-			console.log('asset')
-			break;
-		}
-	}
-})
+	});
 
 // CPA list
 $("#organization").sortable({
-	group: 'asset-orgainizer'
+	group: 'asset-orgainizer',
+
 })
+
+
 
 
 

@@ -37,7 +37,7 @@
     drop: true,
     // Exclude items from being draggable, if the
     // selector matches the item
-    exclude: "",
+    exclude: ".input",
     // If true, search for nested containers within an item
     nested: true,
     // If true, the items are assumed to be arranged vertically
@@ -69,6 +69,12 @@
     // This happens if pullPlaceholder is set to false and the drop occurs outside a container.
     onCancel: function ($item, container, _super, event) {
     },
+
+    //preform cancel
+    cancel: function ($item, container, _super, event) {
+      console.log('cancel called')
+    },
+
     // Executed at the beginning of a mouse move event.
     // The Placeholder has not been moved yet.
     onDrag: function ($item, position, _super, event) {
@@ -88,15 +94,20 @@
       $("body").addClass("dragging")
 
     },
-    // Called when the mouse button is beeing released
+    // Called when the mouse button is being released
     onDrop: function ($item, container, _super, event) {
       $item.removeClass("dragged").removeAttr("style")
       $("body").removeClass("dragging")
     },
     // Called on mousedown. If falsy value is returned, the dragging will not start.
     onMousedown: function($item, _super, event) {
-      event.preventDefault()
-      return true
+      event.preventDefault();
+      return true;
+    },
+    onMouseup: function($item, _super, event) {
+      event.preventDefault();
+      return true;
+
     },
     // Template for the placeholder. Can be any valid jQuery input
     // e.g. a string, a DOM element.
@@ -232,8 +243,12 @@
         this.item = $(e.target).closest(this.options.itemSelector)
         this.itemContainer = itemContainer
 
-        if(!this.options.onMousedown(this.item, groupDefaults.onMousedown, e))
+        if(!this.options.onMousedown(this.item, groupDefaults.onMousedown, e)){
           return
+        }
+        // if(!this.options.onMouseup(this.item, groupDefaults.onMouseup, e)){
+        //   return
+        // }
 
         this.setPointer(e)
         this.toggleListeners('on')
@@ -273,20 +288,29 @@
 
       this.dragInitDone = false
 
+
+      var isCanceled = this.options.cancel(this.item, this.itemContainer, groupDefaults.cancel, e)
+      if (isCanceled) {
+        this.options.onDrop(this.item, this.getContainer(this.item), groupDefaults.onDrop, e)
+      }else{
+        console.log('isCanceled');
+        return;
+      };
+
       if(this.dragging){
         // processing Drop, check if placeholder is detached
-        if(this.placeholder.closest("html")[0])
+        if(this.placeholder.closest("html")[0]){
           this.placeholder.before(this.item).detach()
-        else
+        }
+        else{
           this.options.onCancel(this.item, this.itemContainer, groupDefaults.onCancel, e)
-
-        this.options.onDrop(this.item, this.getContainer(this.item), groupDefaults.onDrop, e)
+        }
 
         // cleanup
+        this.dragging = false
         this.clearDimensions()
         this.clearOffsetParent()
         this.lastAppendedItem = this.sameResultBox = undefined
-        this.dragging = false
       }
     },
     searchValidTarget: function  (pointer, lastPointer) {

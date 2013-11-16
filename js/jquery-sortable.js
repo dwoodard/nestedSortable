@@ -72,7 +72,7 @@
 
     //preform cancel
     cancel: function ($item, container, _super, event) {
-      console.log('cancel called')
+      console.log('cancel happened')
     },
 
     // Executed at the beginning of a mouse move event.
@@ -87,11 +87,11 @@
     // Therefore it might not be the container, that actually contains the item.
     onDragStart: function ($item, container, _super, event) {
       $item.css({
-        height: $item.height(),
-        width: $item.width()
+        // height: $item.height(),
+        // width: $item.width()
       })
       $item.addClass("dragged")
-      $("body").addClass("dragging")
+      // $("body").addClass("dragging")
 
     },
     // Called when the mouse button is being released
@@ -284,18 +284,18 @@
           this.placeholder.detach()
     },
     drop: function  (e) {
-      this.toggleListeners('off')
-
-      this.dragInitDone = false
-
-
       var isCanceled = this.options.cancel(this.item, this.itemContainer, groupDefaults.cancel, e)
       if (isCanceled) {
         this.options.onDrop(this.item, this.getContainer(this.item), groupDefaults.onDrop, e)
       }else{
-        console.log('isCanceled');
+        console.log('isCanceled', e);
         return;
       };
+
+      this.toggleListeners('off')
+      this.dragInitDone = false;
+
+
 
       if(this.dragging){
         // processing Drop, check if placeholder is detached
@@ -401,9 +401,9 @@
     },
     distanceMet: function (e) {
       return (Math.max(
- 				Math.abs(this.pointer.left - e.pageX),
-				Math.abs(this.pointer.top - e.pageY)
-			) >= this.options.distance)
+        Math.abs(this.pointer.left - e.pageX),
+        Math.abs(this.pointer.top - e.pageY)
+      ) >= this.options.distance)
     },
     scroll: function  (e) {
       this.clearDimensions()

@@ -25,31 +25,31 @@
 			<div class="asset-orgainizer">
 				<div class="asset-container">
 					<div class="toolbar">
-						<input type="checkbox">
-						<input type="text">
+						<!-- <input type="checkbox"> -->
+						<input type="text" placeholder="filter">
 					</div>
 					<div class="asset-list">
 						<ol id="assets">
-							<li class="asset">Video 1</li>
-							<li class="asset">Video 2</li>
-							<li class="asset">Video 3</li>
-							<li class="asset">Video 4</li>
-							<li class="asset">Video 5</li>
-							<li class="asset">Video 6</li>
-							<li class="asset">Video 7</li>
-							<li class="asset">Video 8</li>
-							<li class="asset">Video 9</li>
-							<li class="asset">Video 10</li>
-							<li class="asset">Video 11</li>
-							<li class="asset">Video 12</li>
-							<li class="asset">Video 13</li>
-							<li class="asset">Video 14</li>
-							<li class="asset">Video 15</li>
-							<li class="asset">Video 16</li>
-							<li class="asset">Video 17</li>
-							<li class="asset">Video 18</li>
-							<li class="asset">Video 19</li>
-							<li class="asset">Video 20</li>
+							<li class="asset" data-asset-id="1">Video 1</li>
+							<li class="asset" data-asset-id="2">Video 2</li>
+							<li class="asset" data-asset-id="3">Video 3</li>
+							<li class="asset" data-asset-id="4">Video 4</li>
+							<li class="asset" data-asset-id="5">Video 5</li>
+							<li class="asset" data-asset-id="6">Video 6</li>
+							<li class="asset" data-asset-id="7">Video 7</li>
+							<li class="asset" data-asset-id="8">Video 8</li>
+							<li class="asset" data-asset-id="9">Video 9</li>
+							<li class="asset" data-asset-id="10">Video 10</li>
+							<li class="asset" data-asset-id="11">Video 11</li>
+							<li class="asset" data-asset-id="12">Video 12</li>
+							<li class="asset" data-asset-id="13">Video 13</li>
+							<li class="asset" data-asset-id="14">Video 14</li>
+							<li class="asset" data-asset-id="15">Video 15</li>
+							<li class="asset" data-asset-id="16">Video 16</li>
+							<li class="asset" data-asset-id="17">Video 17</li>
+							<li class="asset" data-asset-id="18">Video 18</li>
+							<li class="asset" data-asset-id="19">Video 19</li>
+							<li class="asset" data-asset-id="20">Video 20</li>
 						</ol>
 					</div>
 				</div>
@@ -62,22 +62,22 @@
 
 					<div class="organization-list" >
 						<ol id="organization"  class="">
-							<li class="collection">Collection - Math Department
+							<li class="collection" data-collection-id="1">Collection - Math Department
 								<ol>
-									<li class="playlist">Playlist - Math Department 1 <ol></ol></li>
-									<li class="playlist">Playlist - Math Department 2 <ol></ol></li>
+									<li class="playlist" data-playlist-id="1">Playlist - Math Department 1 <ol></ol></li>
+									<li class="playlist" data-playlist-id="2">Playlist - Math Department 2 <ol></ol></li>
 								</ol>
 							</li>
-							<li class="collection">Collection - Health Department
+							<li class="collection" data-collection-id="2">Collection - Health Department
 								<ol>
-									<li class="playlist">Playlist - Health Department 1<ol></ol></li>
-									<li class="playlist">Playlist - Health Department 2<ol></ol></li>
+									<li class="playlist" data-playlist-id="3">Playlist - Health Department 1<ol></ol></li>
+									<li class="playlist" data-playlist-id="4">Playlist - Health Department 2<ol></ol></li>
 								</ol>
 							</li>
-							<li class="collection">Collection - Science Department
+							<li class="collection" data-collection-id="3">Collection - Science Department
 								<ol>
-									<li class="playlist">Playlist - Science Department 1<ol></ol></li>
-									<li class="playlist">Playlist - Science Department 2<ol></ol></li>
+									<li class="playlist" data-playlist-id="5">Playlist - Science Department 1<ol></ol></li>
+									<li class="playlist" data-playlist-id="6">Playlist - Science Department 2<ol></ol></li>
 								</ol>
 							</li>
 						</ol>
@@ -87,45 +87,33 @@
 		</div>
 	</div>
 
+
+
+
+
+
+
+
+
+
 	<script src="js/jquery-sortable.js"></script>
-
-
-
-
 	<script type="text/javascript">
+		$('.collection-name').click(function(){
+			$('.collection').parent().prepend($('<li class="collection"><input class="input" type="text" placeholder="Collection Name" /><ol></ol></li>'));
+		});
 
-$('.collection-name').click(function(){
-    $('.collection').parent().prepend($(
-    	'<li class="collection"><input class="input" type="text" placeholder="Collection Name" /><ol></ol></li>'));
+		// Assets List
+		var oldContainer
+		$("#assets").sortable({
+			group: 'asset-orgainizer',
+			drop: false,
+			onDragStart: function (item, container, _super) {
+			// Duplicate items of the no drop area
+			if (!container.options.drop){
 
-});
-
-	</script>
-
-
-
-
-
-
-
-
-	<script type="text/javascript">
-
-
-
-
-	// Assets List
-	var oldContainer
-	$("#assets").sortable({
-		group: 'asset-orgainizer',
-		drop: false,
-		onDragStart: function (item, container, _super) {
-		// Duplicate items of the no drop area
-		if (!container.options.drop){
-
-			item.clone().insertAfter(item)
-		}
-		_super(item)
+				item.clone().insertAfter(item)
+			}
+			_super(item)
 		},
 		afterMove: function (placeholder, container) {
 			if (oldContainer != container) {
@@ -136,14 +124,84 @@ $('.collection-name').click(function(){
 			}
 		},
 		cancel: function (item, container, _super, event) {
-			var isGoodToDrop = true;
 
-			droppedItem = /collection|playlist|asset/i.exec(item[0].className)[0]; 
-			droppedContainer = event.toElement.className;
-			if (droppedContainer == 'active' || droppedContainer == 'placeholder') {
-				droppedContainer = /collection|playlist|asset/i.exec(event.toElement.parentNode.className)[0]; 
+			var droppedItem = item[0];
+			var droppedContainer = event.toElement;
+
+
+			if($(droppedItem).hasClass("asset") || $(droppedItem).hasClass("playlist") ){
+				droppedItem = droppedItem.className.match(/asset|playlist/)[0]
+			}
+
+			if($(droppedContainer).hasClass("collection") || $(droppedContainer).hasClass("playlist") ){
+				droppedContainer = droppedContainer.className.match(/collection|playlist/)[0]
+			}
+
+			//If drop on organization
+			if($(droppedContainer).is('#organization')){
+
+
+				droppedContainer = $(droppedContainer).is('#organization') ?'organization':droppedContainer;
+
+				if ($(droppedItem).is('.collection')) {
+					droppedItem = $(droppedItem).is('.collection') ?'collection':'';
+				};
+
+				if ($(droppedItem).is('.playlist')) {
+					droppedItem = $(droppedItem).is('.playlist') ?'playlist':'';
+				};
+
+				if ($(droppedItem).is('.asset')) {
+					droppedItem = $(droppedItem).is('.asset') ?'asset':'';
+				};
+
+			}
+
+			//If droppedContainer is placeholder
+			if($(droppedContainer).is('.placeholder')){
+				droppedContainer = $(droppedContainer).is('#organization') ?'organization':'';
+				console.log('placeholder');
+			}
+
+			//If droppedContainer is Active
+			if ($(droppedContainer).hasClass('asset')){
+				//possible in the video check for asset
+				if ($(droppedContainer).hasClass('asset')){
+					droppedContainer = $(droppedContainer).parent()//.hasClass('asset') ?'asset':'';
+				};
 			};
-			
+
+			//If droppedItem is collection
+			if ($(droppedItem).hasClass('collection')){
+				//possible in the video check for asset
+				if ($(droppedItem).hasClass('collection')){
+					droppedItem = $(droppedItem).is('.collection') ?'collection':droppedContainer;
+				};
+			};
+
+
+			//If droppedContainer is Active
+			if($(droppedContainer).hasClass('active')){
+				//Where did it drop?
+				//possible in the <ol> container check parent
+
+				//is playlist ol?
+				if ($(droppedContainer).parent().hasClass('playlist')){
+					droppedContainer = $(droppedContainer).parent().hasClass('playlist') ?'playlist':'';
+				};
+
+				//is collection ol?
+				if ($(droppedContainer).parent().hasClass('collection')){
+					droppedContainer = $(droppedContainer).parent().hasClass('collection') ?'collection':'';
+				};
+
+
+			}
+
+
+
+
+
 			console.log(droppedItem,droppedContainer);
 
 			if (droppedItem == "playlist" && droppedContainer == "playlist") {
@@ -151,41 +209,41 @@ $('.collection-name').click(function(){
 			};
 
 			if (droppedItem == "collection" && droppedContainer == "playlist") {
+				console.log(droppedItem,droppedContainer);
 				return false;
 			};
 
-			if (droppedItem == "playlist" && droppedContainer == "organization-list") {
+			if (droppedItem == "collection" && droppedContainer == "collection") {
+				console.log(droppedItem,droppedContainer);
 				return false;
 			};
 
-			
+			if (droppedItem == "playlist" && droppedContainer == "organization") {
+				console.log(droppedItem,droppedContainer);
+				return false;
+			};
+			if (droppedItem == "asset" && droppedContainer == "organization") {
+				console.log(droppedItem,droppedContainer);
+				return false;
+			};
 
 
 
-			
-			return isGoodToDrop;
-			
+			return true;
+
 		},
 		onDrop: function (item, container, _super) {
-			// console.log(item, container, _super);
-			container.el.removeClass("active")
-			_super(item)
+				// console.log(item, container, _super);
+				container.el.removeClass("active")
+				_super(item)
+			}
+		});
 
-			
-		}
-	});
+	// CPA list
+	$("#organization").sortable({
+		group: 'asset-orgainizer'
 
-// CPA list
-$("#organization").sortable({
-	group: 'asset-orgainizer',
-
-})
-
-
-
-
-
-
+	})
 </script>
 </body>
 </html>
